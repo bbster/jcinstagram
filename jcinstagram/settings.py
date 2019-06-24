@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'images',
 ]
 BUCKET_NAME = 'jcinstagram'
-AWS_ACCESS_KEY_ID = ''
-AWS_SECRET_ACCESS_KEY = ''
+AWS_ACCESS_KEY_ID = 'AKIAUQHFJLZ3EFMLBOFE'
+AWS_SECRET_ACCESS_KEY = '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'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
