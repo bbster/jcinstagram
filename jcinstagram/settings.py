@@ -37,10 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+
     #my app
     'users',
     'images',
 ]
+BUCKET_NAME = 'jcinstagram'
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,6 +58,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'jcinstagram.urls'
+AUTH_USER_MODEL = 'users.User'
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
+CORS_ALLOW_METHODS = ('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH')
 
 TEMPLATES = [
     {
