@@ -1,12 +1,17 @@
 from django.contrib import admin
-from django.contrib.admin import ModelAdmin
-from images.models import Image, Comment
+from . import models
 
 
-@admin.register(Image)
-class ImageAdmin(ModelAdmin):
-    list_display = ('id', 'file', 'location', 'caption', 'created_at', 'updated_at')
+@admin.register(models.Image)
+class ImageAdmin(admin.ModelAdmin):
+    pass
 
-@admin.register(Comment)
-class CommentAdmin(ModelAdmin):
-    list_display = ('id', 'message', 'created_at', 'updated_at')
+
+@admin.register(models.Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.Like)
+class LikeAdmin(admin.ModelAdmin):
+    pass
