@@ -24,6 +24,6 @@ class Comment(TimeStampedModel):    # 댓글 관련 모델
     image = models.ForeignKey(Image, on_delete=models.CASCADE, null=True)
 
 
-class Like(TimeStampedModel):
+class Like(TimeStampedModel):  # 좋아요
     creator = models.ForeignKey(user_models.User, on_delete=models.CASCADE, null=True)
     image = models.ForeignKey(Image, on_delete=models.CASCADE, null=True)
