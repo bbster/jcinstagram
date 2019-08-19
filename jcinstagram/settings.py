@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users',
     'images',
 ]
+
 BUCKET_NAME = 'jcinstagram'
 AWS_ACCESS_KEY_ID = 'AKIAUQHFJLZ3EFMLBOFE'
 AWS_SECRET_ACCESS_KEY = '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'
