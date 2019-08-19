@@ -17,6 +17,9 @@ class Image(TimeStampedModel):    # 이미지 관련 모델
         caption = models.TextField()    # 설명
         creator = models.ForeignKey(user_models.User, on_delete=models.CASCADE, null=True)
 
+        def __str__(self):
+            return '{} - {}'.format(self.location, self.caption)
+
 
 class Comment(TimeStampedModel):    # 댓글 관련 모델
     message = models.TextField()    # 댓글
@@ -27,3 +30,6 @@ class Comment(TimeStampedModel):    # 댓글 관련 모델
 class Like(TimeStampedModel):  # 좋아요
     creator = models.ForeignKey(user_models.User, on_delete=models.CASCADE, null=True)
     image = models.ForeignKey(Image, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return '{} - {}'.format(self.creator.username, self.image.caption) #  creator의 username, image의 caption 반환
