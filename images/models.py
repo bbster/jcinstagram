@@ -10,7 +10,6 @@ class TimeStampedModel(models.Model):    # 게시물 업로드 및 수정 날짜
     class Meta:    # 필드가 아닌것 정의
         abstract = True
 
-
 class Image(TimeStampedModel):    # 이미지 관련 모델
         file = models.ImageField()    # 이미지 업로드
         location = models.CharField(max_length=140)    # 위치정보
