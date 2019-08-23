@@ -1,16 +1,43 @@
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.response import Response
-from . import models
+
+from images.serializers import ImageSerializer, CommentSerializer, LikeSerializer
+from .models import Image, Comment, Like
 from . import serializers
 
 
 class ListAllImages(viewsets.ModelViewSet):
 
+    serializer_class = ImageSerializer
+    queryset = Image.objects.all()
+
+    # @action(detail=True, methods=['get'])
     def get(self, request, format=None):
-        all_images =  models.Image.objects.all() # DB에 있는 모든 이미지 가져오기
+        all_images =  Image.objects.all() # 모든 이미지 출력
         serializer = serializers.ImageSerializer(all_images, many=True)
 
-        return Response(data=serializer.data)
+        return Response(data = serializer.data)
 
-    def get_queryset(self, pk):
-        return self.queryset.filter(id=self.kwargs.get('pk'))
+
+class ListAllComment(viewsets.ModelViewSet):
+
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+
+    def get(self, request, format=None):
+        all_comment =  Comment.objects.all() # 모든 이미지 출력
+        serializer = serializers.CommentSerializer(all_comment, many=True)
+
+        return Response(data = serializer.data)
+
+class ListAllLikes(viewsets.ModelViewSet):
+
+    serializer_class = LikeSerializer
+    queryset = Like.objects.all()
+
+    def get(self, request, format=None):
+        all_like =  Like.objects.all() # 모든 이미지 출력
+        serializer = serializers.CommentSerializer(all_like, many=True)
+
+        return Response(data = serializer.data)
