@@ -19,6 +19,9 @@ class Image(TimeStampedModel):    # 이미지 관련 모델
         def __str__(self):
             return '{} - {}'.format(self.location, self.caption)
 
+        class Meta:
+            ordering = ['-created_at']
+
 
 class Comment(TimeStampedModel):    # 댓글 관련 모델
     message = models.TextField()    # 댓글

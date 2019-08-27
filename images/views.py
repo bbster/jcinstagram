@@ -1,7 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.decorators import action
 from rest_framework.response import Response
-
 from images.serializers import ImageSerializer, CommentSerializer, LikeSerializer
 from .models import Image, Comment, Like
 from . import serializers
@@ -41,3 +39,16 @@ class ListAllLikes(viewsets.ModelViewSet):
         serializer = serializers.CommentSerializer(all_like, many=True)
 
         return Response(data = serializer.data)
+
+
+class Feed(viewsets.ModelViewSet):
+    serializer_class = ImageSerializer
+    queryset = Image.objects.all()
+
+    def get(self, request, format=None):
+
+        user = request.user
+
+        following_users = user.following.all()
+
+        print(following_users)

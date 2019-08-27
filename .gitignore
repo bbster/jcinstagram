@@ -3,6 +3,7 @@
 client_build
 db.sqlite3
 *.pyc
+requirements.txt
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
