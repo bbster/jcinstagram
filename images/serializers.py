@@ -11,6 +11,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'file',
             'location',
             'caption',
+            'creator'
         )
 
 
