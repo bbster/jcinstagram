@@ -2,46 +2,47 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from images import models
 from images.serializers import ImageSerializer, CommentSerializer, LikeSerializer
 from .models import Image, Comment, Like
 from . import serializers
 
 
-# class ListAllImages(viewsets.ModelViewSet):
-#
-#     serializer_class = ImageSerializer
-#     queryset = Image.objects.all()
-#
-#     # @action(detail=True, methods=['get'])
-#     def get(self, request, format=None):
-#         all_images =  Image.objects.all() # 모든 이미지 출력
-#         serializer = serializers.ImageSerializer(all_images, many=True)
-#
-#         return Response(data = serializer.data)
-#
-#
-# class ListAllComment(viewsets.ModelViewSet):
-#
-#     serializer_class = CommentSerializer
-#     queryset = Comment.objects.all()
-#
-#     def get(self, request, format=None):
-#
-#         all_comment =  Comment.objects.all() # 모든 이미지 출력
-#         serializer = serializers.CommentSerializer(all_comment, many=True)
-#
-#         return Response(data = serializer.data)
-#
-# class ListAllLikes(viewsets.ModelViewSet):
-#
-#     serializer_class = LikeSerializer
-#     queryset = Like.objects.all()
-#
-#     def get(self, request, format=None):
-#         all_like =  Like.objects.all() # 모든 이미지 출력
-#         serializer = serializers.CommentSerializer(all_like, many=True)
-#
-#         return Response(data = serializer.data)
+class ListAllImages(viewsets.ModelViewSet):
+
+    serializer_class = ImageSerializer
+    queryset = Image.objects.all()
+
+    # @action(detail=True, methods=['get'])
+    def get(self, request, format=None):
+        all_images =  Image.objects.all() # 모든 이미지 출력
+        serializer = serializers.ImageSerializer(all_images, many=True)
+
+        return Response(data = serializer.data)
+
+
+class ListAllComment(viewsets.ModelViewSet):
+
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+
+    def get(self, request, format=None):
+
+        all_comment =  Comment.objects.all() # 모든 이미지 출력
+        serializer = serializers.CommentSerializer(all_comment, many=True)
+
+        return Response(data = serializer.data)
+
+class ListAllLikes(viewsets.ModelViewSet):
+
+    serializer_class = LikeSerializer
+    queryset = Like.objects.all()
+
+    def get(self, request, format=None):
+        all_like =  Like.objects.all() # 모든 이미지 출력
+        serializer = serializers.CommentSerializer(all_like, many=True)
+
+        return Response(data = serializer.data)
 
 
 class Feed(viewsets.ModelViewSet):
@@ -77,4 +78,31 @@ class Feed(viewsets.ModelViewSet):
 def get_key(image):
     return image.created_at
 
+class Search(viewsets.ModelViewSet):
+
+    serializer_class = ImageSerializer
+    queryset = Image.objects.all()
+
+    def get(self, request, format=None):
+
+        hashtags = request.query_params.get('hashtags', None)
+
+        if hashtags is not None:
+
+            hashtags = hashtags.split(",")
+
+            images = models.Image.objects.filter(
+                tags__name__in=hashtags).distinct()
+
+            serializer = serializers.ImageSerializer(
+                images, many=True, context={'request': request})
+
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+        else:
+
+            images = models.Image.objects.all()[:20]
+            serializer = serializers.ImageSerializer(
+                images, many=True, context={'request': request})
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
 
