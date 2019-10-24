@@ -6,7 +6,7 @@ router = routers.DefaultRouter()
 # router.register('images', views.ListAllImages)
 # router.register('comments', views.ListAllComment)
 # router.register('likes', views.ListAllLikes)
-router.register('feed', views.Feed)
+router.register('feed', views.Feed) # 인스타그램 게시물
 
 urlpatterns = [
     # path('feed', views.Feed.as_view(), name='feed'),

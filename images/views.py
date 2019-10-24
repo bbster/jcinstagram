@@ -52,9 +52,29 @@ class Feed(viewsets.ModelViewSet):
     def get(self, request, format=None):
 
         user = request.queryset.user()
+
         following_users = user.following.all()
 
-        for following_user in following_users:
-            print(following_user.images.all()[:2])
+        image_list = []
 
-        return Response(status=200)
+        for following_user in following_users:
+
+            user_images = following_user.images.all()[:2]
+
+            for image in user_images:
+
+                image_list.append(image)  #  append는 리스트 제일뒤에 추가 ex) 리스트형식이면 리스트형식 그대로 추가
+                                          #  extend는 리스트 확장 리스트형식의 appending
+
+        sorted_list = sorted(image_list, key=get_key) # 1. 어느리스트를 정렬할것인가
+                                                      # 2. 어떻게 정렬 할것인가
+                                                      # 3. return값을 기준으로 정렬
+        serializer = serializers.ImageSerializer(sorted_list, many=True)
+
+        return Response(serializer.data)
+
+
+def get_key(image):
+    return image.created_at
+
+
