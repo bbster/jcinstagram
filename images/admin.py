@@ -36,6 +36,7 @@ class CommentAdmin(admin.ModelAdmin):
     )
     #  내용, 생성자, 이미지, 생성날짜, 수정날짜
 
+
 @admin.register(models.Like)
 class LikeAdmin(admin.ModelAdmin):
     list_display = (

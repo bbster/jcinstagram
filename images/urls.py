@@ -6,8 +6,7 @@ router = routers.DefaultRouter()
 router.register('images', views.ListAllImages)
 router.register('comments', views.ListAllComment)
 router.register('likes', views.ListAllLikes)
-router.register('feed', views.Feed)
-router.register('search', views.Search)
+# router.register('feed', views.Feed)
 
 urlpatterns = [
     # path('feed', views.Feed.as_view(), name='feed'),

@@ -3,6 +3,7 @@
 client_build
 db.sqlite3
 *.pyc
+setup.cfg
 requirements.txt
 manage.py
 # Elastic Beanstalk Files
