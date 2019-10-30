@@ -8,6 +8,7 @@ class MemberAdmin(ModelAdmin):
     list_display = ('id',
                     'username',
                     'password',
+                    'profile_image',
                     'first_name',
                     'last_name',
                     'bio',

@@ -9,6 +9,7 @@ class User(AbstractUser):
         ('남자', '남자'),
 
     )
+    profile_image = models.ImageField(null=True)
     name = models.CharField(max_length=150, blank=True)    # 이름 값
     website = models.URLField(blank=True)                  # 웹 사이트 입력
     bio = models.TextField(blank=True)                     #

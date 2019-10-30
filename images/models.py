@@ -16,13 +16,18 @@ class Image(TimeStampedModel):  # 이미지 관련 모델
     file = models.ImageField()    # 이미지 업로드
     location = models.CharField(max_length=140)    # 위치정보
     caption = models.TextField()    # 설명
-    creator = models.ForeignKey(user_models.User, on_delete=models.CASCADE, null=True, related_name='images')
+    creator = models.ForeignKey(
+        user_models.User, on_delete=models.CASCADE, null=True, related_name='images')
+
+    @property  # getter 기능을 간편하게 사용하기 위한 function // like_count라는 메서드를 속성처럼 사용할수 있음
+    def like_count(self):
+        return self.likes.all().count()
 
     def __str__(self):
         return '{} - {}'.format(self.location, self.caption)
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-created_at']  # 최신순으로 불러오기
 
 
 class Comment(TimeStampedModel):    # 댓글 관련 모델
