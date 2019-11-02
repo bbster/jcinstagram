@@ -8,8 +8,8 @@ class ExplorerUsers(APIView):
 
     def get(self, request, format=None):
 
-        last_five = models.User.objects.all()[:5]
+        last_user = models.User.objects.all()[:5]
 
-        serializer = serializers.ExploreUserSerializer(last_five, many=True)
+        serializer = serializers.ExploreUserSerializer(last_user, many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
