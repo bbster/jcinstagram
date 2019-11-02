@@ -125,6 +125,19 @@ class CommentOnImage(APIView):  # 이미지에 달린 댓글
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class Comment(APIView):
+
+    def delete(self, request, comment_id, format=None):
+
+        user = request.user
+
+        try:
+            comment = models.Comment.objects.get(id=comment_id, creator=user)
+            comment.delete()
+            return Response(stauts=status.HTTP_204_NO_CONTENT)
+        except models.Comment.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
 #  viewset은 list형식의 데이터 출력시 유
 # class ListAllImages(viewsets.ModelViewSet):
 #
