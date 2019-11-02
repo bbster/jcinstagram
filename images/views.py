@@ -78,8 +78,7 @@ class LikeImage(APIView):
         return Response(status=200)
 
 
-
-# viewset은 list형식의 데이터 출력시 유
+#  viewset은 list형식의 데이터 출력시 유
 # class ListAllImages(viewsets.ModelViewSet):
 #
 #     serializer_class = ImageSerializer  # 시리얼라이저
