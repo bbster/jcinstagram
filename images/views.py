@@ -138,7 +138,8 @@ class Comment(APIView):
         except models.Comment.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-#  viewset은 list형식의 데이터 출력시 유
+
+# viewset은 list형식의 데이터 출력시 유리
 # class ListAllImages(viewsets.ModelViewSet):
 #
 #     serializer_class = ImageSerializer  # 시리얼라이저
