@@ -2,6 +2,8 @@ from rest_framework import serializers
 from . import models
 from users import models as user_models
 
+#  데이터를 Json 형태로 변환 시켜줌
+
 
 class FeedUserSerializer(serializers.ModelSerializer):  # 유저  프로필이미지, 아이디
 
@@ -15,7 +17,7 @@ class FeedUserSerializer(serializers.ModelSerializer):  # 유저  프로필이�
 
 class CommentSerializer(serializers.ModelSerializer):  # 게시물  아이디, 댓글
 
-    creator = FeedUserSerializer()
+    creator = FeedUserSerializer(read_only=True)
 
     class Meta:
         model = models.Comment

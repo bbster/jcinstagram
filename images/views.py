@@ -72,7 +72,7 @@ def get_key(image):
 
 class LikeImage(APIView):
 
-    def get(self, request, image_id, format=None):
+    def post(self, request, image_id, format=None):
 
         user = request.user
 
@@ -100,6 +100,29 @@ class LikeImage(APIView):
             new_like.save()  # 값 저장
 
             return Response(status=status.HTTP_201_CREATED)
+
+
+class CommentOnImage(APIView):  # 이미지에 달린 댓글
+
+    def post(self, request, image_id, format=None):
+
+        user = request.user
+        #  if문 형식으로 try catch 사용하기
+        try:
+            found_image = models.Image.objects.get(id=image_id)
+        except models.Image.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = serializers.CommentSerializer(data=request.data)
+
+        if serializer.is_valid():
+
+            serializer.save(creator=user, image=found_image)
+
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+
+        else:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 #  viewset은 list형식의 데이터 출력시 유

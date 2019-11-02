@@ -2,9 +2,11 @@ from django.urls import path
 from images import views
 
 urlpatterns = [
-    path('images/', views.ListAllImages.as_view()),
-    path('comments/', views.ListAllComments.as_view()),
-    path('likes/', views.ListAllLikes.as_view()),
-    path('<int:image_id>/like/', views.LikeImage.as_view()),
-    path('feed/', views.Feed.as_view()),
+    path('images/', views.ListAllImages.as_view()),  # 모든 이미지
+    path('comments/', views.ListAllComments.as_view()),  # 모든 댓글
+    path('likes/', views.ListAllLikes.as_view()),  # 모든 좋아요
+    path('feed/', views.Feed.as_view()),  # 유저관련
+    path('<int:image_id>/like/', views.LikeImage.as_view()),  # 이미지 좋아요, 좋아요 삭제
+    path('<int:image_id>/comment/', views.CommentOnImage.as_view()),  # 이미지 좋아요, 좋아요 삭제
+
 ]
