@@ -3,17 +3,17 @@ from . import models
 from users import models as user_models
 
 
-class FeedUserSerializer(serializers.ModelSerializer):
+class FeedUserSerializer(serializers.ModelSerializer):  # 유저  프로필이미지, 아이디
 
     class Meta:
         model = user_models.User
         fields = (
-            'username',
             'profile_image',
+            'username',
         )
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):  # 게시물  아이디, 댓글
 
     creator = FeedUserSerializer()
 
@@ -21,12 +21,12 @@ class CommentSerializer(serializers.ModelSerializer):
         model = models.Comment
         fields = (
             'id',
-            'message',
             'creator',
+            'message',
         )
 
 
-class LikeSerializer(serializers.ModelSerializer):
+class LikeSerializer(serializers.ModelSerializer):  # 좋아요  아이디
 
     creator = FeedUserSerializer()
 
@@ -37,7 +37,7 @@ class LikeSerializer(serializers.ModelSerializer):
         )
 
 
-class ImageSerializer(serializers.ModelSerializer):
+class ImageSerializer(serializers.ModelSerializer):  # 이미지  아이디, 이미지파일, 위치, 캡션, 게시글, 좋아요횟수
     # comment, like 직렬화
     comments = CommentSerializer(many=True)
     creator = FeedUserSerializer()

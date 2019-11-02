@@ -71,11 +71,33 @@ def get_key(image):
 
 class LikeImage(APIView):
 
-    def post(self, request, image_id, format=None):
+    def get(self, request, image_id, format=None):
 
-        print(image_id)
+        user = request.user
 
-        return Response(status=200)
+        try:
+            found_image = models.Image.objects.get(id=image_id)
+        except models.Image.DoesNotExist:
+            return Response(status=404)  # 해당 이미지가 없으면 404에러
+
+        try:
+            preexisting_like = models.Like.objects.get(  # 이미 좋아요가 눌려있을때
+                creator=user,
+                image=found_image
+            )
+            preexisting_like.delete()  # 이미 좋아요가 눌러져 있다면 좋아요 삭제
+
+            return Response(status=200)
+        except models.Like.DoesNotExist:  # 좋아요가 없다면
+
+            new_like = models.Like.objects.create(  # 좋아요 추가
+                creator=user,
+                image=found_image
+            )
+
+            new_like.save()  # 값 저장
+
+            return Response(status=200)
 
 
 #  viewset은 list형식의 데이터 출력시 유
