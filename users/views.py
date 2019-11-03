@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from . import models, serializers
 
 
-class ExplorerUsers(APIView):
+class ExploreUsers(APIView):
 
     def get(self, request, format=None):
 
