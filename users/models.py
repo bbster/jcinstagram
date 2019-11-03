@@ -9,16 +9,16 @@ class User(AbstractUser):
         ('남자', '남자'),
 
     )
-    profile_image = models.ImageField(null=True)
+    profile_image = models.ImageField(null=True)           # 프로필 이미지
     name = models.CharField(max_length=150, blank=True)    # 이름 값
     website = models.URLField(blank=True)                  # 웹 사이트 입력
-    bio = models.TextField(blank=True)                     #
+    bio = models.TextField(blank=True)                     # 회사명
 
-    phone = models.CharField(max_length=50,
+    phone = models.CharField(max_length=50,                # 전화번호
                              blank=True,
                              null=True)    # 전화번호
 
-    gender = models.CharField(max_length=20,
+    gender = models.CharField(max_length=20,               # 성별
                               blank=True,
                               choices=GENDER_CHOICES,
                               null=True)    # 성별선택
