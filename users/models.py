@@ -9,7 +9,7 @@ class User(AbstractUser):
         ('남자', '남자'),
 
     )
-    profile_image = models.ImageField(null=True)           # 프로필 이미지
+    profile_image = models.ImageField(null=True, blank=True)           # 프로필 이미지
     name = models.CharField(max_length=150, blank=True)    # 이름 값
     website = models.URLField(blank=True)                  # 웹 사이트 입력
     bio = models.TextField(blank=True)                     # 회사명
@@ -28,3 +28,15 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    @property
+    def post_count(self):
+        return self.images.all().count()
+
+    @property
+    def followers_count(self):
+        return self.followers.all().count()
+
+    @property
+    def following_count(self):
+        return self.following.all().count()
