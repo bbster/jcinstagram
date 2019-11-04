@@ -1,10 +1,13 @@
 from rest_framework import serializers
-from . import models
+from users import models
+from images import serializers as images_serializers
 
 #  데이터를 Json 형태로 변환 시켜줌
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+
+    images = images_serializers.UserProfileSerializer(many=True)
 
     class Meta:
         model = models.User
@@ -15,7 +18,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
             'website',
             'post_count',
             'followers_count',
-            'following_count'
+            'following_count',
+            'images',
         )
 
 

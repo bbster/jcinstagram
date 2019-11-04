@@ -23,6 +23,9 @@ class Image(TimeStampedModel):  # 이미지 관련 모델
     def like_count(self):
         return self.likes.all().count()
 
+    def comment_count(self):
+        return self.comments.all().count()
+
     def __str__(self):
         return '{} - {}'.format(self.location, self.caption)
 
