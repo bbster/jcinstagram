@@ -23,7 +23,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         )
 
 
-class ExploreUserSerializer(serializers.ModelSerializer):  # 유저  프로필이미지, 아이디
+class ListUserSerializer(serializers.ModelSerializer):  # 유저  프로필이미지, 아이디
 
     class Meta:
         model = models.User
