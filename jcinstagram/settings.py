@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'taggit',
     'users',
     'images',
+    'notifications',
 ]
 
 BUCKET_NAME = 'jcinstagram'
