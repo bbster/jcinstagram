@@ -159,6 +159,15 @@ class Comment(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
+class Search(APIView):
+
+    def get(self, request, format=None):
+
+        hashtags = request.query_params.get('hashtags', None)
+
+        print(hashtags)
+
+
 # viewset은 list형식의 데이터 출력시 유리
 # class ListAllImages(viewsets.ModelViewSet):
 #

@@ -1,5 +1,6 @@
 from django.db import models
 from users import models as user_models
+from taggit.managers import TaggableManager
 
 
 class TimeStampedModel(models.Model):    # 게시물 업로드 및 수정 날짜 모델
@@ -18,6 +19,7 @@ class Image(TimeStampedModel):  # 이미지 관련 모델
     caption = models.TextField()    # 설명
     creator = models.ForeignKey(
         user_models.User, on_delete=models.CASCADE, null=True, related_name='images')
+    tags = TaggableManager()
 
     @property  # getter 기능을 간편하게 사용하기 위한 function // like_count라는 메서드를 속성처럼 사용할수 있음
     def like_count(self):

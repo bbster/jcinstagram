@@ -10,5 +10,5 @@ urlpatterns = [
     path('<int:image_id>/unlike/', views.UnLikeImage.as_view()),  # 이미지 좋아요, 좋아요 삭제
     path('<int:image_id>/comment/', views.CommentOnImage.as_view()),  # 이미지 좋아요, 좋아요 삭제
     path('comment/<int:comment_id>/', views.Comment.as_view()),  # 이미지 좋아요, 좋아요 삭제
-
+    path('search/', views.Search.as_view()),  # 이미지 좋아요, 좋아요 삭제
 ]
