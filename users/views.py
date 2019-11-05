@@ -95,3 +95,27 @@ class UserFollowing(APIView):
         serializer = serializers.ListUserSerializer(user_following, many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+class SearchUsers(APIView):
+
+    def get(self, request, format=None):
+
+        username = request.query_params.get('username', None)
+
+        if username is not None:
+
+            users = models.User.objects.filter(username__icontains=username)
+
+            # contains / hashtags가 들어간 단어검색 / 대소문자 구분
+            # icontains / 위와 동일 / 대소문자 구분하지 않음
+            # exact / 정확히 일치하는것 검색 / 대소문자 구분
+            # iexact / 위와동일 / 대소문자 구분하지 않음거
+
+            serializer = serializers.ListUserSerializer(users, many=True)
+
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+        else:
+
+            return Response(status=status.HTTP_400_BAD_REQUEST)

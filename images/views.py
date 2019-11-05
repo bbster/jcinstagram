@@ -159,7 +159,7 @@ class Comment(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-class Search(APIView):
+class SearchHashtags(APIView):
 
     def get(self, request, format=None):
 
@@ -185,6 +185,10 @@ class Search(APIView):
         else:
 
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
 
 # viewset은 list형식의 데이터 출력시 유리
 # class ListAllImages(viewsets.ModelViewSet):
