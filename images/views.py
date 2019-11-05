@@ -165,8 +165,26 @@ class Search(APIView):
 
         hashtags = request.query_params.get('hashtags', None)
 
-        print(hashtags)
+        if hashtags is not None:
 
+            hashtags = hashtags.split(',')
+
+            # testsplit = '1,2,3,,4음'.split()
+            # print(testsplit)음
+
+            images = models.Image.objects.filter(tags__name__in=hashtags).distinct()  # 중복제
+            # contains / hashtags가 들어간 단어검색 / 대소문자 구분
+            # icontains / 위와 동일 / 대소문자 구분하지 않음
+            # exact / 정확히 일치하는것 검색 / 대소문자 구분
+            # iexact / 위와동일 / 대소문자 구분하지 않음거
+
+            serializer = serializers.CountImageSerializer(images, many=True)
+
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+        else:
+
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 # viewset은 list형식의 데이터 출력시 유리
 # class ListAllImages(viewsets.ModelViewSet):
