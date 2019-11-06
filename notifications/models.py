@@ -19,3 +19,9 @@ class Notification(image_models.TimeStampedModel):
     notification_type = models.CharField(max_length=20, choices=TYPE_CHOICES)
     image = models.ForeignKey(image_models.Image, on_delete=models.CASCADE, null=True, blank=True)  # 장고 2.0부터 on_delete 명시적으로 써줘야함
     comment = models.TextField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return 'From: {} - To {}'.format(self.creator, self.to)
