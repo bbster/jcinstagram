@@ -96,6 +96,9 @@ class LikeImage(APIView):
                 creator=user,
                 image=found_image
             )
+
+            notifications_views.create_notification(user, found_image.creator, 'like', found_image
+                                                    )
             new_like.save()  # 값 저장
             return Response(status=status.HTTP_201_CREATED)
 
