@@ -5,6 +5,15 @@ from users import models as user_models
 #  데이터를 Json 형태로 변환 시켜줌
 
 
+class SmallImageSerializer(serializers.ModelSerializer):  # notifications용 시리얼라이저
+
+    class Meta:
+        models = models.Image
+        fields = (
+            'file',
+        )
+
+
 class CountImageSerializer(serializers.ModelSerializer):
 
     class Meta:
