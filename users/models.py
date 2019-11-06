@@ -14,14 +14,8 @@ class User(AbstractUser):
     website = models.URLField(blank=True)                  # 웹 사이트 입력
     bio = models.TextField(blank=True)                     # 회사명
 
-    phone = models.CharField(max_length=50,                # 전화번호
-                             blank=True,
-                             null=True)    # 전화번호
-
-    gender = models.CharField(max_length=20,               # 성별
-                              blank=True,
-                              choices=GENDER_CHOICES,
-                              null=True)    # 성별선택
+    phone = models.CharField(max_length=50, blank=True, null=True)    # 전화번호
+    gender = models.CharField(max_length=20, blank=True, choices=GENDER_CHOICES, null=True)  # 성별선택
 
     followers = models.ManyToManyField("self")
     following = models.ManyToManyField("self")

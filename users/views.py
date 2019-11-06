@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from . import models, serializers
+from notifications import views as notifications_views
 
 
 class ListUsers(APIView):
@@ -29,6 +30,8 @@ class FollowUser(APIView):  # 팔로잉
         user.following.add(user_to_follow)
 
         user.save()
+
+        notifications_views.create_notification(user, user_to_follow, 'follow')
 
         return Response(status=status.HTTP_200_OK)
 

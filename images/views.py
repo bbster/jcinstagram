@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from . import models, serializers
+from notifications import views as notifications_views
 
 
 class ListAllImages(APIView):
@@ -138,6 +139,9 @@ class CommentOnImage(APIView):  # 이미지에 댓글 달기
         if serializer.is_valid():
 
             serializer.save(creator=user, image=found_image)
+
+            notifications_views.create_notification(
+                user, found_image.creator, 'comment', found_image, serializer.data['message'])
 
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
