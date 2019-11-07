@@ -58,6 +58,12 @@ class Feed(APIView):
 
                 image_list.append(image)
 
+        my_images = user.images.all()[:2]
+
+        for image in my_images:
+
+            image_list.append(image)
+
         sorted_list = sorted(image_list, key=get_key)  # 어느리스트를, 무엇을 기준으로 정렬 한다.
 
         print(sorted_list)
