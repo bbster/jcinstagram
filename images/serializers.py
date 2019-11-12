@@ -55,9 +55,7 @@ class LikeSerializer(serializers.ModelSerializer):  # 좋아요  아이디
 
     class Meta:
         model = models.Like
-        fields = (
-            'creator',
-        )
+        fields = '__all__'
 
 
 class ImageSerializer(serializers.ModelSerializer):  # 이미지  아이디, 이미지파일, 위치, 캡션, 게시글, 좋아요횟수
