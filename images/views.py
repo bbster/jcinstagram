@@ -217,6 +217,13 @@ class ModerateComments(APIView):
 
 class ImageDetail(APIView):
 
+    def find_own_image(self, image_id, user):
+        try:
+            image = models.Image.objects.get(id=image_id, creator=user)
+            return image
+        except models.Image.DoesNotExist:
+            return None
+
     def get(self, request, image_id, format=None):
 
         user = request.user
@@ -224,11 +231,45 @@ class ImageDetail(APIView):
         try:
             image = models.Image.objects.get(id=image_id)
         except models.Image.DoesNotExist:
-            return Response(sttaus=status.HTTP_404_NOT_FOUND)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = serializers.ImageSerializer(image)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, image_id, format=None):
+
+        user = request.user
+
+        image = self.find_own_image(image_id, user)
+
+        if image is None:
+
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+            serializer = serializers.InputImageSerializer(image, data=request.data, partial=True)
+
+            if serializer.is_valid():
+
+                serializer.save(creator=user)
+
+                return Response(data=serializer.data, status=status.HTTP_204_NO_CONTENT)
+            else:
+                return Response(data=serializer.data, stauts=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, image_id, format=None):
+
+        user = request.user
+
+        image = self.find_own_image(image_id, user)
+
+        if image is None:
+
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        image.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 # viewset은 list형식의 데이터 출력시 유리
 # class ListAllImages(viewsets.ModelViewSet):

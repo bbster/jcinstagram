@@ -58,6 +58,17 @@ class LikeSerializer(serializers.ModelSerializer):  # 좋아요  아이디
         fields = '__all__'
 
 
+class InputImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Image
+        fields = (
+            'file',
+            'location',
+            'caption',
+        )
+
+
 class ImageSerializer(serializers.ModelSerializer):  # 이미지  아이디, 이미지파일, 위치, 캡션, 게시글, 좋아요횟수
     # comment, like 직렬화
     comments = CommentSerializer(many=True)
