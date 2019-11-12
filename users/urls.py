@@ -8,5 +8,6 @@ urlpatterns = [
     path('<username>/', views.UserProfile.as_view()),  # 프로필 뷰
     path('<username>/userfollowers', views.UserFollowers.as_view()),  # 팔로우 유저리스트
     path('<username>/userfollowing', views.UserFollowing.as_view()),  # 팔로잉 유저리스트
-    path('search/username/', views.SearchUsers.as_view()),  # 이미지 좋아요, 좋아요 삭제
+    path('search/username/', views.SearchUsers.as_view()),  # 유저 검색
+    path('<username>/password/', views.ChangePassword.as_view()),  # 패스워드 변경
 ]
