@@ -190,6 +190,7 @@ class ChangePassword(APIView):
                         user.save()
 
                         return Response(status=status.HTTP_200_OK)
+
                     else:
 
                         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -201,6 +202,7 @@ class ChangePassword(APIView):
             else:
 
                 return Response(status=status.HTTP_400_BAD_REQUEST)
+
         else:
 
             return Response(status=status.HTTP_401_UNAUTHORIZED)
