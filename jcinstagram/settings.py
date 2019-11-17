@@ -37,12 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
     'corsheaders',
     'taggit',
     'taggit_serializer',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'rest_auth.registration',
     'users',
     'images',
     'notifications',
@@ -67,7 +71,7 @@ CORS_ALLOW_METHODS = ('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH')
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    # 'allauth.account.auth_backends.AuthenticationBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 REST_FRAMEWORK = {
@@ -165,5 +169,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 TAGGIT_CASE_INSENSITIVE = True
 
-ACCOUNT_LOGOUT_ON_GET = True
 JWT_USE_JWT = True
+ACCOUNT_LOGOUT_ON_GET = True
