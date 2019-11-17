@@ -107,6 +107,7 @@ class UserProfile(APIView):
 
                 return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class UserFollowers(APIView):
 
     def get(self, request, username, format=None):
@@ -126,8 +127,6 @@ class UserFollowers(APIView):
 class UserFollowing(APIView):
 
     def get(self, request, username, format=None):
-
-
 
         try:
             found_user = models.User.objects.get(username=username)
