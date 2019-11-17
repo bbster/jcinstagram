@@ -45,9 +45,6 @@ INSTALLED_APPS = [
     'notifications',
 ]
 
-BUCKET_NAME = 'jcinstagram'
-AWS_ACCESS_KEY_ID = 'AKIAUQHFJLZ3EFMLBOFE'
-AWS_SECRET_ACCESS_KEY = '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'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -67,7 +64,7 @@ CORS_ALLOW_METHODS = ('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH')
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    # 'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 TEMPLATES = [
@@ -94,8 +91,12 @@ WSGI_APPLICATION = 'jcinstagram.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'jcinstagram',
+        'USER': 'postgres',
+        'PASSWORD': 'dlwlehd12',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
