@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from . import models
 from users import models as user_models
+from taggit_serializer.serializers import (TagListSerializerField, TaggitSerializer)
 
 #  데이터를 Json 형태로 변환 시켜줌
 
@@ -69,10 +70,11 @@ class InputImageSerializer(serializers.ModelSerializer):
         )
 
 
-class ImageSerializer(serializers.ModelSerializer):  # 이미지  아이디, 이미지파일, 위치, 캡션, 게시글, 좋아요횟수
+class ImageSerializer(TaggitSerializer, serializers.ModelSerializer):  # 이미지  아이디, 이미지파일, 위치, 캡션, 게시글, 좋아요횟수
     # comment, like 직렬화
     comments = CommentSerializer(many=True)
     creator = FeedUserSerializer()
+    tags = TagListSerializerField()
 
     class Meta:
         model = models.Image
@@ -83,5 +85,6 @@ class ImageSerializer(serializers.ModelSerializer):  # 이미지  아이디, 이
             'location',
             'caption',
             'comments',
+            'tags',
             'like_count',
         )
