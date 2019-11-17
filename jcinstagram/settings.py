@@ -38,14 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'allauth',
+    'allauth',  # 소셜 계정 연동 하기위한 패키지
     'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
     'corsheaders',
-    'taggit',
+    'taggit',  # 태그 관련된 패키지
     'taggit_serializer',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
+    'rest_auth',  # 토큰 사용을 위한 패키지
     'rest_auth.registration',
     'users',
     'images',
@@ -171,3 +173,4 @@ TAGGIT_CASE_INSENSITIVE = True
 
 REST_USE_JWT = True
 ACCOUNT_LOGOUT_ON_GET = True
+SITE_ID = 1
