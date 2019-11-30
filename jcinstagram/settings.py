@@ -75,10 +75,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES':(
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
-    'DEFAULT_AUTHENTICATION_CLASSES':(
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     )
 
@@ -171,3 +171,4 @@ TAGGIT_CASE_INSENSITIVE = True
 
 REST_USE_JWT = True
 ACCOUNT_LOGOUT_ON_GET = True
+SITE_ID = 1
