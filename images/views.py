@@ -2,6 +2,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from . import models, serializers
+from users import models as user_models
+from users import serializers as user_serializers
 from notifications import views as notifications_views
 
 
@@ -91,6 +93,18 @@ def get_key(image):
 
 
 class LikeImage(APIView):
+
+    def get(self, request, image_id, format=None):
+
+        likes = models.Like.objects.filter(image__id=image_id)
+
+        like_creators_ids = likes.values('creator_id')
+
+        users = user_models.User.objects.filter(id__in=like_creators_ids)
+
+        serializer = user_serializers.ListUserSerializer(
+            users, many=True, context={'request': request}
+        )
 
     def post(self, request, image_id, format=None):
 

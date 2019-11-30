@@ -10,4 +10,5 @@ urlpatterns = [
     path('<username>/userfollowing', views.UserFollowing.as_view()),  # 팔로잉 유저리스트
     path('search/username/', views.SearchUsers.as_view()),  # 유저 검색
     path('<username>/password/', views.ChangePassword.as_view()),  # 패스워드 변경
+    path('login/facebook/', views.FacebookLogin.as_view()),
 ]
